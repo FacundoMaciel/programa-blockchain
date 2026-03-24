@@ -6,15 +6,12 @@ import "./Interfaces/IResult.sol";
 
 contract Adder {
 
+    // Objeto para llamar a otro smart contract: Interface + address
     // Variables
-    address public resultado;
-    address public admin;
-    uint256 public fee;
+    address public result;
 
-    constructor(address resultado_, address admin_){
-        resultado = resultado_;
-        admin = admin_;
-        fee = 5;
+    constructor(address results_){
+        result = results_;
     }
 
     // Modifiers
@@ -23,13 +20,16 @@ contract Adder {
 
     // External functions
     function addition(uint256 num1_, uint256 num2_) external {
-        uint256 resultado_ = num1_ + num2_;
-        IResult(resultado).setResultado(resultado_);
+        uint256 results_ = num1_ + num2_;
+        IResult(result).setResultado(results_);
     }
 
-    function setFee(uint256 newFee_) external {
-        if (msg.sender != admin) revert();
-        fee = newFee_;
+    function setFeeByMsg(uint256 newFee_) external {
+        IResult(result).setFeeByMsg(newFee_);
+    }
+
+    function setFeeByTx(uint256 newFee_) external {
+        IResult(result).setFeeByTx(newFee_);
     }
 
     // Internal functions
