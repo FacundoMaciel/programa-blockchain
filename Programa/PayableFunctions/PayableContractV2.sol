@@ -10,7 +10,7 @@ contract PayableContractv2 {
 
         // recipient wallet receptor + call + valor ether + data
         (bool success,) = msg.sender.call{value: amount_}("");
-        require(success, "Tranfer failed");
+        require(success, "Transfer failed");
 
     }
 
